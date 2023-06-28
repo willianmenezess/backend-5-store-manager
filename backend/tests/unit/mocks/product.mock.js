@@ -22,10 +22,14 @@ const productsFromModel = [
 
 const productByIdFromDB = { id: 1, name: 'Martelo de Thor' };
 const productByIdFromModel = { id: 1, name: 'Martelo de Thor' };
+const productsFromServiceSuccessful = { status: 'SUCCESSFUL', data: productsFromModel };
+const productByIdFromServiceSuccessful = { status: 'SUCCESSFUL', data: productByIdFromModel };
 
 module.exports = {
   productsFromDB,
   productsFromModel,
   productByIdFromDB,
   productByIdFromModel,
+  productsFromServiceSuccessful,
+  productByIdFromServiceSuccessful,
 };

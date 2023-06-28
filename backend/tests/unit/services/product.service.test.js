@@ -27,5 +27,10 @@ describe('Realizando teste - PRODUCT SERVICE:', function () {
 
   it('recuperando um produto por id com falha', async function () {
     // Escreva seu teste aqui
+    sinon.stub(productModel, 'findById').resolves(null);
+    const inputData = 99999;
+    const responseService = await productService.findById(inputData);
+    expect(responseService.status).to.be.equal('NOT_FOUND');
+    expect(responseService.data).to.be.deep.equal({ message: 'Product not found' });
   });
 });

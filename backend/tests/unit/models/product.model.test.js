@@ -30,4 +30,15 @@ describe('Realizando teste - PRODUCT MODEL:', function () {
     const product = await productModel.findById(inputData);
     expect(product).to.be.an('undefined');
   });
+
+  it('inserindo um produto com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 5 }]);
+    const inputData = {
+      name: 'Produto Teste',
+    };
+    const responseData = { id: 5, ...inputData };
+    const product = await productModel.insert(inputData);
+    expect(product).to.be.an('object');
+    expect(product).to.be.deep.equal(responseData);
+  });
 });

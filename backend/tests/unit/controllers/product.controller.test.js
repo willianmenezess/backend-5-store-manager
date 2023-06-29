@@ -48,4 +48,19 @@ describe('Realizando teste - PRODUCT CONTROLLER:', function () {
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
+
+  it('inserindo um produto com sucesso', async function () {
+    const data = { id: 5, name: 'Produto Teste' };
+    const status = 'CREATED';
+    const responseService = { status, data };
+    sinon.stub(productService, 'insert').resolves(responseService);
+    const req = { body: { name: 'Produto Teste' } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await productController.insert(req, res);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(data);
+  });
 });

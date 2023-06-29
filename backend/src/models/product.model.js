@@ -1,4 +1,6 @@
 const connection = require('./connection');
+const { getFormattedColumnNames, 
+  getFormattedPlaceholders } = require('../utils/generateFormattedQuery');
 
 const getAll = async () => {
   const [products] = await connection.execute(
@@ -13,7 +15,16 @@ const findById = async (id) => {
   return product;
 };
 
+const insert = async (productData) => {
+  const columns = getFormattedColumnNames(productData);
+  const placeholders = getFormattedPlaceholders(productData);
+  const query = `INSERT INTO products (${columns}) VALUES (${placeholders})`;
+  const [{ insertId }] = await connection.execute(query, Object.values(productData));
+  return { id: insertId, ...productData };
+};
+
 module.exports = {
   getAll,
   findById,
+  insert,
 };

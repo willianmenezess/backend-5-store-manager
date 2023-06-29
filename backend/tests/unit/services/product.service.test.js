@@ -41,4 +41,13 @@ describe('Realizando teste - PRODUCT SERVICE:', function () {
     expect(responseService.status).to.be.equal('CREATED');
     expect(responseService.data).to.be.deep.equal({ id: 5, name: 'Produto Teste' });
   });
+
+  it('inserindo um produto com falha - "name" com menos de 5 caracteres', async function () {
+    const inputData = {
+      name: 'Prod',
+    };
+    const responseService = await productService.insert(inputData);
+    expect(responseService.status).to.be.equal('INVALID_VALUE');
+    expect(responseService.data).to.be.deep.equal({ message: '"name" length must be at least 5 characters long' });
+  });
 });

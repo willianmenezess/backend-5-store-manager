@@ -12,8 +12,16 @@ const getAll = async () => {
     }
     return { status: 'SUCCESSFUL', data };
   };
+
+  const deleteSale = async (id) => {
+    const existId = await saleModel.findSaleById(id);
+    if (!existId) return { status: 'NOT_FOUND', data: { message: 'Sale not found' } };
+    await saleModel.deleteSale(id);
+    return { status: 'DELETED' };
+  };
   
   module.exports = {
     getAll,
     findById,
+    deleteSale,
   };

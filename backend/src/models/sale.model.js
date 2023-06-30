@@ -26,7 +26,20 @@ const findById = async (id) => {
   return camelize(sale);
 };
 
+const findSaleById = async (id) => {
+  const query = 'SELECT * FROM sales WHERE id = ? AND id IS NOT NULL;';
+  const [[sale]] = await connection.execute(query, [id]);
+  return camelize(sale);
+};
+
+const deleteSale = async (id) => {
+  const query = 'DELETE FROM sales WHERE id = ?';
+  await connection.execute(query, [id]);
+};
+
 module.exports = {
   getAll,
   findById,
+  deleteSale,
+  findSaleById,
 };

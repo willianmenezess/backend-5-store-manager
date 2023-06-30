@@ -52,4 +52,11 @@ describe('Realizando teste - PRODUCT MODEL:', function () {
     expect(product).to.be.an('object');
     expect(product).to.be.deep.equal(productUpdateFromModel);
   });
+
+  it('deletando um produto com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const inputData = 5;
+    const product = await productModel.deleteProduct(inputData);
+    expect(product).to.be.an('undefined');
+  });
 });

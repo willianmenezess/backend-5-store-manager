@@ -79,4 +79,15 @@ describe('Realizando teste - PRODUCT CONTROLLER:', function () {
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(data);
   });
+
+  it('deletando um produto com sucesso', async function () {
+    sinon.stub(productService, 'deleteProduct').resolves({ status: 'DELETED' });
+    const req = { params: { id: 5 } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await productController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+  });
 });

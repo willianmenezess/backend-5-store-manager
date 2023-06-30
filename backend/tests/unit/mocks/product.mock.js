@@ -29,6 +29,9 @@ const productByIdFromServiceNotFound = {
   data: { message: 'Product not found' },
 };
 
+const productInsertFromModel = { id: 5, name: 'Produto Teste' };
+const productUpdateFromModel = { id: 5, name: 'Produto Teste2' };
+
 module.exports = {
   productsFromDB,
   productsFromModel,
@@ -37,4 +40,6 @@ module.exports = {
   productsFromServiceSuccessful,
   productByIdFromServiceSuccessful,
   productByIdFromServiceNotFound,
+  productInsertFromModel,
+  productUpdateFromModel,
 };

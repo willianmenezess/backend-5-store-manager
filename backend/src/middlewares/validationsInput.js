@@ -6,6 +6,15 @@ const validationInputName = (req, res, next) => {
   next();
 };
 
+const validationInputId = (req, res, next) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ message: '"id" is required' });
+  }
+  next();
+};
+
 module.exports = {
   validationInputName,
+  validationInputId,
 };

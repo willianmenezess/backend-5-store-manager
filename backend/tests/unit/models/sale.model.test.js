@@ -30,4 +30,11 @@ describe('Realizando teste - SALE MODEL:', function () {
     const sale = await saleModel.findById(inputData);
     expect(sale).to.be.deep.equal([]);
   });
+
+  it('deletando uma venda com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const inputData = 1;
+    const sale = await saleModel.deleteSale(inputData);
+    expect(sale).to.be.deep.equal(undefined);
+  });
 });

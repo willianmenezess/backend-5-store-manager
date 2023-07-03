@@ -37,4 +37,17 @@ describe('Realizando teste - SALE MODEL:', function () {
     const sale = await saleModel.deleteSale(inputData);
     expect(sale).to.be.deep.equal(undefined);
   });
+
+  it('recuperando uma venda por id com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([[{
+      id: 1,
+      date: '2023-06-29T01:16:15.000Z',
+    }]]);
+    const inputData = 1;
+    const sale = await saleModel.findSaleById(inputData);
+    expect(sale).to.be.deep.equal({
+      id: 1,
+      date: '2023-06-29T01:16:15.000Z',
+    });
+  });
 });

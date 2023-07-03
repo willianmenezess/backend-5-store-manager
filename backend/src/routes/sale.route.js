@@ -7,5 +7,6 @@ const { validationInputId } = validationsInput;
 route.get('/', saleController.getAll);
 route.get('/:id', saleController.findById);
 route.delete('/:id', validationInputId, saleController.deleteSale);
+route.post('/', saleController.create);
 
 module.exports = route;

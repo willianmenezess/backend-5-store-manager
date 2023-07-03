@@ -1,4 +1,6 @@
 const { saleModel } = require('../models');
+const { productModel } = require('../models');
+const { validateInputProduct } = require('./validationsInputValues');
 
 const getAll = async () => {
     const data = await saleModel.getAll();
@@ -21,6 +23,9 @@ const getAll = async () => {
   };
 
   const create = async (sale) => {
+    const allProducts = await productModel.getAll();
+    const error = validateInputProduct(sale, allProducts);
+    if (error) return { status: error.status, data: { message: error.message } };
     const data = await saleModel.create(sale);
     return { status: 'CREATED', data };
   };

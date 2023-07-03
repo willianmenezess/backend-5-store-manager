@@ -39,12 +39,6 @@ const deleteSale = async (id) => {
   await connection.execute(query, [id]);
 };
 
-// const getCurrentSaleId = async () => {
-//   const query = 'SELECT id FROM sales ORDER BY id DESC LIMIT 1';
-//   const [[currentSale]] = await connection.execute(query);
-//   return currentSale.id;
-// };
-
 const create = async (sale) => {
   const currentData = new Date();
   const query1 = 'INSERT INTO sales (date) VALUES (?)';

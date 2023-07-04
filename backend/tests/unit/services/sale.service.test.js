@@ -1,9 +1,10 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { saleModel } = require('../../../src/models');
+const { saleModel, productModel } = require('../../../src/models');
 const { saleService } = require('../../../src/services');
 const { salesFromModel, salesFromServiceSuccessful, saleByIdFromModel, 
-  saleByIdFromServiceSuccessful, saleByIdFromServiceNotFound } = require('../mocks/sale.mock');
+  saleByIdFromServiceSuccessful, saleByIdFromServiceNotFound,
+createSaleFromModel } = require('../mocks/sale.mock');
 
 describe('Realizando teste - SALE SERVICE:', function () {
   afterEach(function () {
@@ -49,4 +50,25 @@ describe('Realizando teste - SALE SERVICE:', function () {
     expect(responseService.status).to.be.equal('NOT_FOUND');
     expect(responseService.data).to.be.deep.equal({ message: 'Sale not found' });
   });
+
+  it('criando uma venda com sucesso', async function () {
+    sinon.stub(productModel, 'getAll').resolves([
+      { id: 1, name: 'Martelo de Thor' }, 
+      { id: 2, name: 'Escudo do Capitão América' },
+    ]);
+    sinon.stub(saleModel, 'create').resolves(createSaleFromModel);
+    const inputData = [
+      {
+        productId: 1,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5,
+      },
+    ];
+    const responseService = await saleService.create(inputData);
+    expect(responseService.status).to.be.equal('CREATED');
+    expect(responseService.data).to.be.deep.equal(createSaleFromModel);
+    });
 });

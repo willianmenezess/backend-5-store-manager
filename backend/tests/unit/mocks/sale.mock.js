@@ -48,6 +48,20 @@ const salesFromModel = [
     status: 'NOT_FOUND',
     data: { message: 'Sale not found' },
   };
+
+  const createSaleFromModel = {
+    id: 10,
+    itemsSold: [
+      {
+        productId: 1,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5,
+      },
+    ],
+  };
   
   module.exports = {
     salesFromDB,
@@ -57,4 +71,5 @@ const salesFromModel = [
     salesFromServiceSuccessful,
     saleByIdFromServiceSuccessful,
     saleByIdFromServiceNotFound,
+    createSaleFromModel,
   };

@@ -50,4 +50,24 @@ describe('Realizando teste - SALE MODEL:', function () {
       date: '2023-06-29T01:16:15.000Z',
     });
   });
+
+  it('criando uma venda com sucesso', async function () {
+    sinon.stub(connection, 'execute').onFirstCall().resolves([{ insertId: 10 }]).onSecondCall()
+    .resolves([{ affectedRows: 1 }]);
+    const inputData = [
+      {
+        productId: 1,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5,
+      },
+    ];
+    const sale = await saleModel.create(inputData);
+    expect(sale).to.be.deep.equal({
+      id: 10,
+      itemsSold: inputData,
+    });
+  });
 });

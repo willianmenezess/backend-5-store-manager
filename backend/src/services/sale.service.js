@@ -1,6 +1,7 @@
 const { saleModel } = require('../models');
 const { productModel } = require('../models');
-const { validateInputProduct } = require('./validationsInputValues');
+const { validateInputProduct, validateSaleId, 
+  validateInputProductId } = require('./validationsInputValues');
 
 const getAll = async () => {
     const data = await saleModel.getAll();
@@ -30,9 +31,23 @@ const getAll = async () => {
     return { status: 'CREATED', data };
   };
 
+  const updateQuantity = async (saleId, productId, quantity) => {
+    const errorSaleId = await validateSaleId(saleId);
+    if (errorSaleId) return { status: errorSaleId.status, data: { message: errorSaleId.message } };
+    const allProducts = await productModel.getAll();
+    const errorProductId = validateInputProductId(productId, allProducts);
+    console.log('validateInputProductId:', errorProductId);
+    if (errorProductId) {
+    return { status: errorProductId.status, data: { message: errorProductId.message } };
+   } 
+    const data = await saleModel.updateQuantity(saleId, productId, quantity);
+    return { status: 'SUCCESSFUL', data };
+  };
+
   module.exports = {
     getAll,
     findById,
     deleteSale,
     create,
+    updateQuantity,
   };

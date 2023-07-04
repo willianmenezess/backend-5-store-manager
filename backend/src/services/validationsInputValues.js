@@ -1,4 +1,5 @@
 const { insertProductSchema } = require('./schemas');
+const { saleModel } = require('../models');
 
 const validateInsertProduct = (keysObjectToValidate) => {
   const { error } = insertProductSchema.validate(keysObjectToValidate);
@@ -20,8 +21,30 @@ const validateInputProduct = (sale, allProducts) => {
   }
   return false;
 };
+
+const validateInputProductId = (productId, allProducts) => {
+  const allProductsIds = allProducts.map((item) => item.id);
+  console.log('todos os ids de produtos:', allProductsIds);
+  console.log('productId recebido:', productId);
+  console.log(typeof productId);
+  console.log(allProductsIds.includes(productId));
+  if (!allProductsIds.includes(productId)) {
+    return { status: 'NOT_FOUND', message: 'Product not found in sale' };
+  }
+  return false;
+};
+
+const validateSaleId = async (saleId) => {
+  const saleExists = await saleModel.findSaleById(saleId);
+  if (!saleExists) {
+    return { status: 'NOT_FOUND', message: 'Sale not found' };
+  }
+  return false;
+};
  
   module.exports = {
     validateInsertProduct,
     validateInputProduct,
+    validateInputProductId,
+    validateSaleId,
   };

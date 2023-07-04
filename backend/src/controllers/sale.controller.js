@@ -23,9 +23,20 @@ const create = async (req, res) => {
   return res.status(mapStatusHTTP(status)).json(data);
 };
 
+const updateQuantity = async (req, res) => {
+  const { saleId, productId } = req.params;
+  const { quantity } = req.body;
+  const NumQuantity = Number(quantity);
+  const NumSaleId = Number(saleId);
+  const NumProdId = Number(productId);
+  const { status, data } = await saleService.updateQuantity(NumSaleId, NumProdId, NumQuantity);
+  return res.status(mapStatusHTTP(status)).json(data);
+};
+
 module.exports = {
   getAll,
   findById,
   deleteSale,
   create,
+  updateQuantity,
 };

@@ -46,9 +46,21 @@ const validateInputSale2 = (req, res, next) => {
   next();
 };
 
+const validateUpdateQuantity = (req, res, next) => {
+  const { quantity } = req.body;
+  if (quantity === undefined) {
+    return res.status(400).json({ message: '"quantity" is required' });
+  }
+  if (Number(quantity) <= 0) {
+    return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
+  }
+  next();
+};
+
 module.exports = {
   validationInputName,
   validationInputId,
   validateInputSale1,
   validateInputSale2,
+  validateUpdateQuantity,
 };

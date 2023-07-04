@@ -71,4 +71,25 @@ describe('Realizando teste - SALE SERVICE:', function () {
     expect(responseService.status).to.be.equal('CREATED');
     expect(responseService.data).to.be.deep.equal(createSaleFromModel);
     });
+
+  it('criando uma venda com falha', async function () {
+    sinon.stub(productModel, 'getAll').resolves([
+      { id: 1, name: 'Martelo de Thor' }, 
+      { id: 2, name: 'Escudo do Capitão América' },
+    ]);
+    sinon.stub(saleModel, 'create').resolves(createSaleFromModel);
+    const inputData = [
+      {
+        productId: 9999,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5,
+      },
+    ];
+    const responseService = await saleService.create(inputData);
+    expect(responseService.status).to.be.equal('NOT_FOUND');
+    expect(responseService.data).to.be.deep.equal({ message: 'Product not found' });
+  });
 });

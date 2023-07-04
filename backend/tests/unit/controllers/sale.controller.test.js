@@ -4,7 +4,8 @@ const sinonChai = require('sinon-chai');
 const { saleController } = require('../../../src/controllers');
 const { saleService } = require('../../../src/services');
 const { salesFromServiceSuccessful,
-saleByIdFromServiceSuccessful, saleByIdFromServiceNotFound } = require('../mocks/sale.mock');
+saleByIdFromServiceSuccessful, saleByIdFromServiceNotFound,
+createSaleFromModel } = require('../mocks/sale.mock');
 
 const { expect } = chai;
 chai.use(sinonChai);
@@ -59,5 +60,26 @@ describe('Realizando teste - SALE CONTROLLER:', function () {
     await saleController.deleteSale(req, res);
     expect(res.status).to.have.been.calledWith(204);
     expect(res.json).to.have.been.calledWith();
+  });
+
+  it('criando uma venda com sucesso', async function () {
+    sinon.stub(saleService, 'create').resolves({ status: 'CREATED', data: createSaleFromModel });
+    const req = { body: [
+      {
+        productId: 1,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5,
+      },
+    ] };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await saleController.create(req, res);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(createSaleFromModel);
   });
 });

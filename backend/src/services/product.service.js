@@ -35,10 +35,19 @@ const deleteProduct = async (id) => {
   return { status: 'DELETED' };
 };
 
+const searchProductsFiltered = async (searchTerm) => {
+  const allProducts = await productModel.getAll();
+  const validateTerm = validations.validateSearchTerm(searchTerm);
+  if (validateTerm) return { status: validateTerm.status, data: allProducts };
+  const filteredProducts = allProducts.filter((product) => product.name.includes(searchTerm));
+  return { status: 'SUCCESSFUL', data: filteredProducts };
+};
+
 module.exports = {
   getAll,
   findById,
   insert,
   update,
   deleteProduct,
+  searchProductsFiltered,
 };

@@ -38,9 +38,16 @@ const validateSaleId = async (saleId) => {
   return false;
 };
  
+const validateSearchTerm = (searchTerm) => {
+  if (searchTerm === '') {
+    return { status: 'SUCCESSFUL' };
+  }
+};
+
   module.exports = {
     validateInsertProduct,
     validateInputProduct,
     validateInputProductId,
     validateSaleId,
+    validateSearchTerm,
   };

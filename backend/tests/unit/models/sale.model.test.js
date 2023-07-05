@@ -70,4 +70,13 @@ describe('Realizando teste - SALE MODEL:', function () {
       itemsSold: inputData,
     });
   });
+
+  it('atualizando a quantidade de um produto em uma venda com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const inputData = [1, 1, 5];
+    const sale = await saleModel.updateQuantity(...inputData);
+    expect(sale).to.have.property('productId');
+    expect(sale).to.have.property('saleId');
+    expect(sale).to.have.property('quantity');
+  });
 });

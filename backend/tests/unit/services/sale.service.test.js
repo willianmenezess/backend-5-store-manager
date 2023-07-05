@@ -92,4 +92,54 @@ describe('Realizando teste - SALE SERVICE:', function () {
     expect(responseService.status).to.be.equal('NOT_FOUND');
     expect(responseService.data).to.be.deep.equal({ message: 'Product not found' });
   });
+
+  it('atualizando a quantidade de um produto em uma venda com sucesso', async function () {
+    sinon.stub(saleModel, 'findSaleById').resolves([{
+      id: 1,
+      date: '2023-06-29T01:16:15.000Z',
+    }]);
+    sinon.stub(productModel, 'getAll').resolves([
+      { id: 1, name: 'Martelo de Thor' }, 
+      { id: 2, name: 'Escudo do Capitão América' },
+    ]);
+    sinon.stub(saleModel, 'updateQuantity').resolves();
+    const inputData = [
+      {
+        quantity: 10,
+      },
+    ];
+    const responseService = await saleService.updateQuantity(1, 2, inputData.quantity);
+    expect(responseService.status).to.be.equal('SUCCESSFUL');
+  });
+
+  it('atualizando a quantidade de um produto em uma venda com falha - saleId', async function () {
+    sinon.stub(saleModel, 'findSaleById').resolves(undefined);
+    const inputData = [
+      {
+        quantity: 10,
+      },
+    ];
+    const responseService = await saleService.updateQuantity(1, 2, inputData.quantity);
+    expect(responseService.status).to.be.equal('NOT_FOUND');
+    expect(responseService.data).to.be.deep.equal({ message: 'Sale not found' });
+  });
+
+  it('atualizando a quantidade de um produto em uma venda com falha - productId', async function () {
+    sinon.stub(saleModel, 'findSaleById').resolves([{
+      id: 1,
+      date: '2023-06-29T01:16:15.000Z',
+    }]);
+    sinon.stub(productModel, 'getAll').resolves([
+      { id: 1, name: 'Martelo de Thor' }, 
+      { id: 2, name: 'Escudo do Capitão América' },
+    ]);
+    const inputData = [
+      {
+        quantity: 10,
+      },
+    ];
+    const responseService = await saleService.updateQuantity(1, 99999, inputData.quantity);
+    expect(responseService.status).to.be.equal('NOT_FOUND');
+    expect(responseService.data).to.be.deep.equal({ message: 'Product not found in sale' });
+  });
 });

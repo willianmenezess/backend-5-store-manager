@@ -82,4 +82,15 @@ describe('Realizando teste - SALE CONTROLLER:', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(createSaleFromModel);
   });
+
+  it('atualizando a quantidade de um produto em uma venda com sucesso', async function () {
+    sinon.stub(saleService, 'updateQuantity').resolves({ status: 'SUCCESSFUL' });
+    const req = { params: { saleId: 1, productId: 1 }, body: { quantity: 10 } };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
+    };
+    await saleController.updateQuantity(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+  });
 });

@@ -24,10 +24,6 @@ const validateInputProduct = (sale, allProducts) => {
 
 const validateInputProductId = (productId, allProducts) => {
   const allProductsIds = allProducts.map((item) => item.id);
-  console.log('todos os ids de produtos:', allProductsIds);
-  console.log('productId recebido:', productId);
-  console.log(typeof productId);
-  console.log(allProductsIds.includes(productId));
   if (!allProductsIds.includes(productId)) {
     return { status: 'NOT_FOUND', message: 'Product not found in sale' };
   }

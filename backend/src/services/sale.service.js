@@ -36,7 +36,6 @@ const getAll = async () => {
     if (errorSaleId) return { status: errorSaleId.status, data: { message: errorSaleId.message } };
     const allProducts = await productModel.getAll();
     const errorProductId = validateInputProductId(productId, allProducts);
-    console.log('validateInputProductId:', errorProductId);
     if (errorProductId) {
     return { status: errorProductId.status, data: { message: errorProductId.message } };
    } 

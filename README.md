@@ -726,20 +726,4 @@ expect(next).to.have.been.calledWith(); // verifica se o `next` foi chamado pelo
 ---
 
 <details>
-<summary>🗣 Nos dê feedbacks sobre o projeto!</summary>
 
-Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário.
-**Leva menos de 3 minutos!**
-
-[Formulário de avaliação do projeto](https://be-trybe.typeform.com/to/ZTeR4IbH#cohort_hidden=CH29-A&template=betrybe/sd-0x-store-manager)
-
-</details>
-  
-<details>
-<summary>🗂 Compartilhe seu portfólio!</summary>
-
-Você sabia que o LinkedIn é a principal rede social profissional e compartilhar o seu aprendizado lá é muito importante para quem deseja construir uma carreira de sucesso? Compartilhe esse projeto no seu LinkedIn, marque o perfil da Trybe (@trybe) e mostre para a sua rede toda a sua evolução.
-
-gcGVzc29hIGRlIGZhY2lsaXRhw6
-
-</details>

@@ -96,4 +96,23 @@ describe('Realizando teste - PRODUCT SERVICE:', function () {
     expect(responseService.status).to.be.equal('NOT_FOUND');
     expect(responseService.data).to.be.deep.equal({ message: 'Product not found' });
   });
+
+  it('pesquisando o nome de um produto com sucesso', async function () {
+    sinon.stub(productModel, 'getAll').resolves(productsFromModel);
+    const searchTerm = 'Martelo';
+    const responseService = await productService.searchProductsFiltered(searchTerm);
+    expect(responseService.status).to.be.equal('SUCCESSFUL');
+    expect(responseService.data).to.be.deep.equal([{
+      id: 1,
+      name: 'Martelo de Thor',
+    }]);
+  });
+
+  it('pesquisando o nome de um produto com uma string vazia', async function () {
+    sinon.stub(productModel, 'getAll').resolves(productsFromModel);
+    const searchTerm = '';
+    const responseService = await productService.searchProductsFiltered(searchTerm);
+    expect(responseService.status).to.be.equal('SUCCESSFUL');
+    expect(responseService.data).to.be.deep.equal(productsFromModel);
+  });
 });

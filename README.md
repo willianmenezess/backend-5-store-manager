@@ -128,13 +128,13 @@ npm run test:mutation  # roda os testes e mostra a cobertura de mutações
 
 |Diagrama de Entidade-Relacionamento|
 |:--:|
-|![DER](./public/erStoreManager.png)|
+|![DER](https://raw.githubusercontent.com/tryber/sd-029-a-store-manager/master/public/erStoreManager.png?token=GHSAT0AAAAAAB3DTNNYSLFHDYOXOY7YVAOEZGOMPSQ)|
 
 |Tabela|Formato|Notas|
 |---|---|---|
-|`products`|![Tabela Produtos](./public/tableproducts.png)|O `id` é gerado automaticamente|
-|`sales`|![Tabela Vendas](./public/tablesales.png)|O `id` e `date` são gerados automaticamente|
-|`sales_products`|![Tabela Vendas-Produtos](./public/tablesalesproducts.png)|Os registros nessa tabela são removidos automaticamente em caso de remoção do produto ou da venda relacionados (`ON DELETE CASCADE`)|
+|`products`|![Tabela Produtos](https://github.com/tryber/sd-029-a-store-manager/raw/master/public/tableproducts.png)|O `id` é gerado automaticamente|
+|`sales`|![Tabela Vendas](https://github.com/tryber/sd-029-a-store-manager/raw/master/public/tablesales.png)|O `id` e `date` são gerados automaticamente|
+|`sales_products`|![Tabela Vendas-Produtos](https://github.com/tryber/sd-029-a-store-manager/raw/master/public/tablesalesproducts.png)|Os registros nessa tabela são removidos automaticamente em caso de remoção do produto ou da venda relacionados (`ON DELETE CASCADE`)|
 
 - Os scripts para criar e popular o banco de dados podem ser vistos no diretório [`sql`](./sql);
 
